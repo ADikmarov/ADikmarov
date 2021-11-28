@@ -5,13 +5,13 @@
 
 <p align="left"> <a href="https://github.com/ryo-ma/github-profile-trophy"><img src="https://github-profile-trophy.vercel.app/?username=adikmarov" alt="adikmarov" /></a> </p>
 
-- 🔭 I’m currently working on [Osome](https://osome.com)
+- 🔭 &nbsp; I’m currently working on [Osome](https://osome.com)
 
-- 🌱 I’m currently learning **AWS**
+- 🌱 &nbsp; I’m currently learning **AWS**
 
-- 💬 Ask me about **Node.js, React, TypeScript**
+- 💬 &nbsp; Ask me about **Node.js, React, TypeScript**
 
-- 📫 How to reach me **artem@dikmarov.ru**
+- 📫 &nbsp; How to reach me **artem@dikmarov.ru**
 
 <p align="left">
 <a href="https://instagram.com/tema_d_01" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/instagram.svg" alt="tema_d_01" height="30" width="40" /></a>
