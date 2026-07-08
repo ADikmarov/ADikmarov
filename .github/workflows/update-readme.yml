@@ -1,0 +1,46 @@
+name: Update profile
+
+on:
+  schedule:
+    - cron: '0 5 * * *' # daily, morning in Europe/Amsterdam
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - id: generate
+        run: npm run generate
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        continue-on-error: true # partial success still commits; failure surfaces below
+
+      - name: Commit refreshed assets
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets
+          if git diff --cached --quiet; then
+            echo "No changes."
+          else
+            git commit -m "chore: refresh profile ($(date -u +%F))"
+            git push
+          fi
+
+      - name: Surface generation failure
+        if: steps.generate.outcome == 'failure'
+        run: |
+          echo "::error::One or more sections failed to generate — see the generate step."
+          exit 1
