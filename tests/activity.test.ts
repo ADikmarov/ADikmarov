@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { eventToMessage, relativeTime, renderActivity } from '../scripts/sections/activity';
+import { contributionsLine, dedupeConsecutive, eventToMessage, relativeTime, renderActivity } from '../scripts/sections/activity';
 
 const NOW = new Date('2026-07-08T12:00:00Z');
 
@@ -25,6 +25,16 @@ describe('eventToMessage', () => {
   it('maps push events with commit count', () => {
     expect(eventToMessage({ ...base, type: 'PushEvent', payload: { commits: [{}, {}, {}] } }))
       .toBe('pushed 3 commits to ADikmarov/proj');
+  });
+
+  it('uses payload.size when the commits array is absent', () => {
+    expect(eventToMessage({ ...base, type: 'PushEvent', payload: { size: 2 } }))
+      .toBe('pushed 2 commits to ADikmarov/proj');
+  });
+
+  it('omits the count for trimmed push payloads (public events API)', () => {
+    expect(eventToMessage({ ...base, type: 'PushEvent', payload: {} }))
+      .toBe('pushed to ADikmarov/proj');
   });
 
   it('maps opened pull requests', () => {
@@ -80,5 +90,47 @@ describe('renderActivity', () => {
   it('renders git log command with empty items and does not throw', () => {
     const svg = renderActivity([]);
     expect(svg).toContain('git log --oneline');
+  });
+
+  it('renders the contributions summary line when provided', () => {
+    const svg = renderActivity(
+      [{ msg: 'pushed 2 commits to a/b', when: '2 days ago' }],
+      '# 1234 contributions in the last year · 856 in private repos',
+    );
+    expect(svg).toContain('# 1234 contributions in the last year · 856 in private repos');
+  });
+
+  it('omits the summary line when null', () => {
+    const svg = renderActivity([], null);
+    expect(svg).not.toContain('contributions in the last year');
+  });
+});
+
+describe('dedupeConsecutive', () => {
+  it('collapses consecutive items with the same message, keeping the newest', () => {
+    const items = [
+      { msg: 'pushed to a/b', when: 'today' },
+      { msg: 'pushed to a/b', when: 'today' },
+      { msg: 'pushed to a/b', when: 'yesterday' },
+      { msg: 'opened PR a/b#1', when: 'yesterday' },
+      { msg: 'pushed to a/b', when: '3 days ago' },
+    ];
+    expect(dedupeConsecutive(items)).toEqual([
+      { msg: 'pushed to a/b', when: 'today' },
+      { msg: 'opened PR a/b#1', when: 'yesterday' },
+      { msg: 'pushed to a/b', when: '3 days ago' },
+    ]);
+  });
+});
+
+describe('contributionsLine', () => {
+  it('mentions private repos when restricted count is positive', () => {
+    expect(contributionsLine({ total: 1234, restricted: 856 }))
+      .toBe('# 1234 contributions in the last year · 856 in private repos');
+  });
+
+  it('omits the private part when restricted count is zero', () => {
+    expect(contributionsLine({ total: 42, restricted: 0 }))
+      .toBe('# 42 contributions in the last year');
   });
 });

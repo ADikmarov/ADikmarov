@@ -1,5 +1,4 @@
 import { config } from '../config';
-import { fetchRepos, fetchUser } from '../github';
 import { palette } from '../render/palette';
 import { pad } from '../render/text';
 import { renderTerminal, type Line, type Span } from '../render/terminal';
@@ -19,7 +18,7 @@ export function uptimeYears(now: Date): number {
   return now.getFullYear() - config.careerStartYear;
 }
 
-export function renderNeofetch(data: { publicRepos: number; stars: number }, now: Date): string {
+export function renderNeofetch(now: Date): string {
   const fields: Array<[string, string, string?]> = [
     ['Role', config.role],
     ['Company', config.company],
@@ -29,7 +28,6 @@ export function renderNeofetch(data: { publicRepos: number; stars: number }, now
     ['Shell', config.shell],
     ['Editor', config.editor],
     ['Uptime', `${uptimeYears(now)} years in production`, palette.green],
-    ['Repos', `${data.publicRepos} public · ${data.stars} stars`, palette.yellow],
   ];
 
   const right: Span[][] = [
@@ -54,7 +52,5 @@ export function renderNeofetch(data: { publicRepos: number; stars: number }, now
 }
 
 export async function buildNeofetch(): Promise<string> {
-  const [user, repos] = await Promise.all([fetchUser(), fetchRepos()]);
-  const stars = repos.reduce((sum, r) => sum + r.stargazers_count, 0);
-  return renderNeofetch({ publicRepos: user.public_repos, stars }, new Date());
+  return renderNeofetch(new Date());
 }

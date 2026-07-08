@@ -1,4 +1,4 @@
-import { fetchEvents, type GhEvent } from '../github';
+import { fetchContributions, fetchEvents, type Contributions, type GhEvent } from '../github';
 import { palette } from '../render/palette';
 import { pad, truncate } from '../render/text';
 import { renderTerminal, type Line } from '../render/terminal';
@@ -22,8 +22,11 @@ export function relativeTime(iso: string, now: Date): string {
 export function eventToMessage(e: GhEvent): string | null {
   switch (e.type) {
     case 'PushEvent': {
-      const n = e.payload.commits?.length ?? 0;
-      return `pushed ${n} commit${n === 1 ? '' : 's'} to ${e.repo.name}`;
+      // The public events API often trims push payloads to nothing — fall back gracefully
+      const n = e.payload.size ?? e.payload.commits?.length ?? 0;
+      return n > 0
+        ? `pushed ${n} commit${n === 1 ? '' : 's'} to ${e.repo.name}`
+        : `pushed to ${e.repo.name}`;
     }
     case 'PullRequestEvent':
       if (e.payload.action === 'opened') return `opened PR ${e.repo.name}#${e.payload.number}`;
@@ -43,7 +46,22 @@ export function eventToMessage(e: GhEvent): string | null {
   }
 }
 
-export function renderActivity(items: Array<{ msg: string; when: string }>): string {
+export function dedupeConsecutive(
+  items: Array<{ msg: string; when: string }>,
+): Array<{ msg: string; when: string }> {
+  // Consecutive same-message runs collapse to the newest occurrence
+  return items.filter((it, i) => i === 0 || it.msg !== items[i - 1].msg);
+}
+
+export function contributionsLine(c: Contributions): string {
+  const priv = c.restricted > 0 ? ` · ${c.restricted} in private repos` : '';
+  return `# ${c.total} contributions in the last year${priv}`;
+}
+
+export function renderActivity(
+  items: Array<{ msg: string; when: string }>,
+  summary?: string | null,
+): string {
   const lines: Line[] = [
     { spans: [
         { text: 'artem@dikmarov ~ % ', color: palette.green, bold: true },
@@ -57,18 +75,25 @@ export function renderActivity(items: Array<{ msg: string; when: string }>): str
       ],
     })),
   ];
+  if (summary) {
+    lines.push({ spans: [{ text: summary, color: palette.overlay }] });
+  }
   return renderTerminal(lines);
 }
 
 export async function buildActivity(): Promise<string> {
-  const events = await fetchEvents();
+  const [events, contribs] = await Promise.all([
+    fetchEvents(),
+    fetchContributions().catch(() => null), // summary is optional — never fail the section over it
+  ]);
   const now = new Date();
-  const items = events
-    .map((e) => {
-      const msg = eventToMessage(e);
-      return msg ? { msg, when: relativeTime(e.created_at, now) } : null;
-    })
-    .filter((x): x is { msg: string; when: string } => x !== null)
-    .slice(0, MAX_ITEMS);
-  return renderActivity(items);
+  const items = dedupeConsecutive(
+    events
+      .map((e) => {
+        const msg = eventToMessage(e);
+        return msg ? { msg, when: relativeTime(e.created_at, now) } : null;
+      })
+      .filter((x): x is { msg: string; when: string } => x !== null),
+  ).slice(0, MAX_ITEMS);
+  return renderActivity(items, contribs ? contributionsLine(contribs) : null);
 }

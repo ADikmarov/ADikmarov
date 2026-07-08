@@ -38,3 +38,51 @@ export const fetchLanguages = (url: string) => ghFetch<Record<string, number>>(u
 
 export const fetchEvents = () =>
   ghFetch<GhEvent[]>(`/users/${config.username}/events/public?per_page=100`);
+
+export interface Contributions {
+  total: number;
+  restricted: number;
+}
+
+// Contribution counters are the only public signal of private-repo work;
+// `restricted` stays 0 unless the profile enables "Include private contributions".
+export async function fetchContributions(): Promise<Contributions | null> {
+  const token = process.env.GITHUB_TOKEN;
+  if (!token) return null; // GraphQL API requires auth
+  const res = await fetch(`${API}/graphql`, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+      'User-Agent': config.username,
+    },
+    body: JSON.stringify({
+      query: `query($login: String!) {
+        user(login: $login) {
+          contributionsCollection {
+            contributionCalendar { totalContributions }
+            restrictedContributionsCount
+          }
+        }
+      }`,
+      variables: { login: config.username },
+    }),
+  });
+  if (!res.ok) throw new Error(`GitHub GraphQL ${res.status}`);
+  const body = (await res.json()) as {
+    data?: {
+      user?: {
+        contributionsCollection?: {
+          contributionCalendar: { totalContributions: number };
+          restrictedContributionsCount: number;
+        };
+      };
+    };
+  };
+  const cc = body.data?.user?.contributionsCollection;
+  if (!cc) throw new Error('GitHub GraphQL: malformed response');
+  return {
+    total: cc.contributionCalendar.totalContributions,
+    restricted: cc.restrictedContributionsCount,
+  };
+}

@@ -10,15 +10,15 @@ describe('uptimeYears', () => {
 });
 
 describe('renderNeofetch', () => {
-  const svg = renderNeofetch({ publicRepos: 42, stars: 137 }, NOW);
+  const svg = renderNeofetch(NOW);
 
-  it('shows live repo stats and uptime', () => {
-    expect(svg).toContain('42 public · 137 stars');
+  it('shows uptime and no repo stats', () => {
     expect(svg).toContain('13 years in production');
+    expect(svg).not.toContain('Repos');
   });
 
   it('shows all profile fields', () => {
-    for (const s of ['Role', 'Company', 'Stack', 'AI', 'OS', 'Shell', 'Editor', 'Uptime', 'Repos']) {
+    for (const s of ['Role', 'Company', 'Stack', 'AI', 'OS', 'Shell', 'Editor', 'Uptime']) {
       expect(svg).toContain(s);
     }
     expect(svg).not.toContain('artem@dikmarov.ru');
