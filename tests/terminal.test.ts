@@ -8,7 +8,7 @@ describe('renderTerminal', () => {
     expect(svg).toContain('<svg xmlns="http://www.w3.org/2000/svg"');
     expect(svg).toContain(`fill="${palette.bg}"`);
     expect(svg).toContain('hello &amp; &lt;world&gt;');
-    expect(svg.substring(svg.indexOf('xmlns') + 60)).not.toContain('http://'); // no external URLs after namespace
+    expect(svg.substring(svg.indexOf('xmlns') + 60)).not.toMatch(/https?:\/\//); // no external URLs after namespace
   });
 
   it('renders macOS chrome dots when requested', () => {

@@ -1,11 +1,9 @@
 {
   "name": "adikmarov",
   "version": "1.0.0",
-  "description": "<h1 align=\"center\">Hi 👋, I'm Artem</h1> <h3 align=\"center\">Full-Stack developer from the Netherlands</h3>",
-  "main": "index.js",
-  "directories": {
-    "doc": "docs"
-  },
+  "description": "SVG generator for my terminal-style GitHub profile README",
+  "private": true,
+  "type": "module",
   "scripts": {
     "test": "vitest run",
     "generate": "tsx scripts/generate.ts"
@@ -21,7 +19,9 @@
     "url": "https://github.com/ADikmarov/ADikmarov/issues"
   },
   "homepage": "https://github.com/ADikmarov/ADikmarov#readme",
-  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
   "devDependencies": {
     "@types/node": "^26.1.1",
     "tsx": "^4.23.0",
