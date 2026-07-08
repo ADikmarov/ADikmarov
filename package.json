@@ -1,0 +1,31 @@
+{
+  "name": "adikmarov",
+  "version": "1.0.0",
+  "description": "<h1 align=\"center\">Hi 👋, I'm Artem</h1> <h3 align=\"center\">Full-Stack developer from the Netherlands</h3>",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "vitest run",
+    "generate": "tsx scripts/generate.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ADikmarov/ADikmarov.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ADikmarov/ADikmarov/issues"
+  },
+  "homepage": "https://github.com/ADikmarov/ADikmarov#readme",
+  "type": "module",
+  "devDependencies": {
+    "@types/node": "^26.1.1",
+    "tsx": "^4.23.0",
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.10"
+  }
+}
