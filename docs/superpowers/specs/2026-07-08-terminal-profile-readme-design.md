@@ -62,7 +62,7 @@ artem@dikmarov.ru
 | Repos   | «N public · N stars»                             | GitHub API |
 | Contact | artem@dikmarov.ru                                | статика  |
 
-Дату старта карьеры уточнить у Артёма при реализации (конфиг-константа).
+Старт карьеры: 2013 год (конфиг-константа `CAREER_START_YEAR = 2013`).
 
 ### 3. `assets/activity.svg` — последняя активность
 
