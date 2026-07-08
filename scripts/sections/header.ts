@@ -1,10 +1,9 @@
 import { config } from '../config';
 import { palette } from '../render/palette';
-import { CHAR_W, LINE_H, PAD_TOP, PAD_X, renderTerminal, type Line } from '../render/terminal';
+import { CHAR_W, LINE_H, PAD_TOP, PAD_X, CHROME_H, renderTerminal, type Line } from '../render/terminal';
 
 const PROMPT = 'artem@dikmarov ~ % ';
 const CMD = 'whoami';
-const CHROME_H = 30;
 
 export async function buildHeader(): Promise<string> {
   const lines: Line[] = [

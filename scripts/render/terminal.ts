@@ -15,7 +15,7 @@ export const CHAR_W = 8.4;
 export const LINE_H = 22;
 export const PAD_X = 24;
 export const PAD_TOP = 20;
-const CHROME_H = 30;
+export const CHROME_H = 30;
 
 export function renderTerminal(lines: Line[], opts: TerminalOptions = {}): string {
   const width = opts.width ?? 820;
