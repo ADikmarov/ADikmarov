@@ -11,8 +11,12 @@ export function relativeTime(iso: string, now: Date): string {
   if (days <= 0) return 'today';
   if (days === 1) return 'yesterday';
   if (days < 7) return `${days} days ago`;
-  if (days < 30) return `${Math.floor(days / 7)} weeks ago`;
-  return `${Math.floor(days / 30)} months ago`;
+  if (days < 30) {
+    const w = Math.floor(days / 7);
+    return `${w} week${w === 1 ? '' : 's'} ago`;
+  }
+  const m = Math.floor(days / 30);
+  return `${m} month${m === 1 ? '' : 's'} ago`;
 }
 
 export function eventToMessage(e: GhEvent): string | null {
@@ -29,7 +33,9 @@ export function eventToMessage(e: GhEvent): string | null {
     case 'CreateEvent':
       return e.payload.ref_type === 'repository' ? `created repository ${e.repo.name}` : null;
     case 'ReleaseEvent':
-      return `released ${e.payload.release.tag_name} in ${e.repo.name}`;
+      return e.payload.release?.tag_name
+        ? `released ${e.payload.release.tag_name} in ${e.repo.name}`
+        : null;
     case 'WatchEvent':
       return `starred ${e.repo.name}`;
     default:
