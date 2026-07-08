@@ -1,0 +1,20 @@
+export const config = {
+  username: 'ADikmarov',
+  name: 'Artem Dikmarov',
+  role: 'Full-Stack Developer',
+  company: 'Osome',
+  location: 'Amsterdam, NL',
+  email: 'artem@dikmarov.ru',
+  stack: ['TypeScript', 'Node.js', 'React', 'Go', 'Python'],
+  ai: ['Claude Code', 'LangChain', 'MCP', 'RAG'],
+  os: 'macOS',
+  shell: 'zsh',
+  editor: 'Claude Code',
+  careerStartYear: 2013,
+  alwaysShowLangs: ['Go', 'Python'],
+  links: [
+    { label: 'Instagram', url: 'https://instagram.com/tema_d_01' },
+    { label: 'Dribbble', url: 'https://dribbble.com/adikmarov' },
+    { label: 'LeetCode', url: 'https://leetcode.com/adikmarov' },
+  ],
+} as const;
