@@ -8,11 +8,17 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: update-readme
+  cancel-in-progress: false
+
 jobs:
   update:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main # re-runs pin GITHUB_SHA to the original attempt; always build from the current tip
 
       - uses: actions/setup-node@v4
         with:
@@ -36,6 +42,7 @@ jobs:
             echo "No changes."
           else
             git commit -m "chore: refresh profile ($(date -u +%F))"
+            git pull --rebase origin main
             git push
           fi
 
