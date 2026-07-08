@@ -32,6 +32,14 @@ describe('computeLangStats', () => {
     ]);
     expect(stats.filter((s) => !['Go', 'Python'].includes(s.name))).toHaveLength(6);
   });
+
+  it('returns always-show langs at 0% when there are no bytes at all', () => {
+    const stats = computeLangStats([]);
+    expect(stats).toEqual([
+      { name: 'Go', pct: 0 },
+      { name: 'Python', pct: 0 },
+    ]);
+  });
 });
 
 describe('renderLangs', () => {

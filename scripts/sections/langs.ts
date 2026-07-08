@@ -20,7 +20,12 @@ export function computeLangStats(byteMaps: Record<string, number>[]): LangStat[]
   for (const lang of config.alwaysShowLangs) {
     if (!totals.has(lang)) totals.set(lang, 0);
   }
-  const grand = [...totals.values()].reduce((a, b) => a + b, 0) || 1;
+  const grand = [...totals.values()].reduce((a, b) => a + b, 0);
+  if (grand === 0) {
+    return [...config.alwaysShowLangs]
+      .sort((a, b) => a.localeCompare(b))
+      .map((name) => ({ name, pct: 0 }));
+  }
 
   // largest-remainder rounding over the FULL set so integer shares sum to 100
   const exact = [...totals.entries()].map(([name, bytes]) => ({
