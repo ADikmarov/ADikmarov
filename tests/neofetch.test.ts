@@ -18,9 +18,10 @@ describe('renderNeofetch', () => {
   });
 
   it('shows all profile fields', () => {
-    for (const s of ['Role', 'Company', 'Stack', 'AI', 'OS', 'Shell', 'Editor', 'Uptime', 'Repos', 'Contact']) {
+    for (const s of ['Role', 'Company', 'Stack', 'AI', 'OS', 'Shell', 'Editor', 'Uptime', 'Repos']) {
       expect(svg).toContain(s);
     }
+    expect(svg).not.toContain('artem@dikmarov.ru');
     expect(svg).toContain('Claude Code · LangChain · MCP · RAG');
     expect(svg).toContain('TypeScript, Node.js, React, Go, Python');
   });

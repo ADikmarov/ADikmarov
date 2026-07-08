@@ -4,7 +4,6 @@ export const config = {
   role: 'Full-Stack Developer',
   company: 'Osome',
   location: 'Amsterdam, NL',
-  email: 'artem@dikmarov.ru',
   stack: ['TypeScript', 'Node.js', 'React', 'Go', 'Python'],
   ai: ['Claude Code', 'LangChain', 'MCP', 'RAG'],
   os: 'macOS',
@@ -14,7 +13,7 @@ export const config = {
   alwaysShowLangs: ['Go', 'Python'],
   links: [
     { label: 'Instagram', url: 'https://instagram.com/tema_d_01' },
-    { label: 'Dribbble', url: 'https://dribbble.com/adikmarov' },
-    { label: 'LeetCode', url: 'https://leetcode.com/adikmarov' },
+    { label: 'LinkedIn', url: 'https://www.linkedin.com/in/adikmarov/' },
+    { label: 'X', url: 'https://x.com/tema_d_01' },
   ],
 } as const;

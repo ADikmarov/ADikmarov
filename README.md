@@ -8,8 +8,8 @@
 
 <p align="center">
   <a href="https://instagram.com/tema_d_01">Instagram</a> ·
-  <a href="https://dribbble.com/adikmarov">Dribbble</a> ·
-  <a href="https://leetcode.com/adikmarov">LeetCode</a>
+  <a href="https://www.linkedin.com/in/adikmarov/">LinkedIn</a> ·
+  <a href="https://x.com/tema_d_01">X</a>
 </p>
 
 <p align="center"><sub>generated daily by <a href=".github/workflows/update-readme.yml">GitHub Actions</a> · no templates were harmed</sub></p>

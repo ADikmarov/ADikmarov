@@ -7,9 +7,9 @@
 <rect width="820" height="194" rx="12" fill="#1e1e2e"/>
 
 <text x="24" y="36" xml:space="preserve" class="mono"><tspan fill="#a6e3a1" font-weight="600">artem@dikmarov ~ % </tspan><tspan fill="#cdd6f4">stats --langs</tspan></text>
-<text x="24" y="58" xml:space="preserve" class="mono"><tspan fill="#89b4fa">TypeScript  </tspan><tspan fill="#a6e3a1">█████████████████</tspan><tspan fill="#313244">░░░</tspan><tspan fill="#a6adc8">   87%</tspan></text>
-<text x="24" y="80" xml:space="preserve" class="mono"><tspan fill="#89b4fa">JavaScript  </tspan><tspan fill="#a6e3a1">██</tspan><tspan fill="#313244">░░░░░░░░░░░░░░░░░░</tspan><tspan fill="#a6adc8">    8%</tspan></text>
-<text x="24" y="102" xml:space="preserve" class="mono"><tspan fill="#89b4fa">CSS         </tspan><tspan fill="#a6e3a1">█</tspan><tspan fill="#313244">░░░░░░░░░░░░░░░░░░░</tspan><tspan fill="#a6adc8">    5%</tspan></text>
+<text x="24" y="58" xml:space="preserve" class="mono"><tspan fill="#89b4fa">TypeScript  </tspan><tspan fill="#a6e3a1">███████████████████</tspan><tspan fill="#313244">░</tspan><tspan fill="#a6adc8">   93%</tspan></text>
+<text x="24" y="80" xml:space="preserve" class="mono"><tspan fill="#89b4fa">JavaScript  </tspan><tspan fill="#a6e3a1">█</tspan><tspan fill="#313244">░░░░░░░░░░░░░░░░░░░</tspan><tspan fill="#a6adc8">    4%</tspan></text>
+<text x="24" y="102" xml:space="preserve" class="mono"><tspan fill="#89b4fa">CSS         </tspan><tspan fill="#a6e3a1">█</tspan><tspan fill="#313244">░░░░░░░░░░░░░░░░░░░</tspan><tspan fill="#a6adc8">    3%</tspan></text>
 <text x="24" y="124" xml:space="preserve" class="mono"><tspan fill="#89b4fa">Go          </tspan><tspan fill="#a6e3a1"></tspan><tspan fill="#313244">░░░░░░░░░░░░░░░░░░░░</tspan><tspan fill="#a6adc8">   &lt;1%</tspan></text>
 <text x="24" y="146" xml:space="preserve" class="mono"><tspan fill="#89b4fa">Python      </tspan><tspan fill="#a6e3a1"></tspan><tspan fill="#313244">░░░░░░░░░░░░░░░░░░░░</tspan><tspan fill="#a6adc8">   &lt;1%</tspan></text>
 <text x="24" y="168" xml:space="preserve" class="mono"><tspan fill="#89b4fa">Shell       </tspan><tspan fill="#a6e3a1"></tspan><tspan fill="#313244">░░░░░░░░░░░░░░░░░░░░</tspan><tspan fill="#a6adc8">   &lt;1%</tspan></text>

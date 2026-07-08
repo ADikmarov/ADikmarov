@@ -30,7 +30,6 @@ export function renderNeofetch(data: { publicRepos: number; stars: number }, now
     ['Editor', config.editor],
     ['Uptime', `${uptimeYears(now)} years in production`, palette.green],
     ['Repos', `${data.publicRepos} public · ${data.stars} stars`, palette.yellow],
-    ['Contact', config.email, palette.blue],
   ];
 
   const right: Span[][] = [
