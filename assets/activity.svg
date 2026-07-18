@@ -8,6 +8,6 @@
 
 <text x="24" y="36" xml:space="preserve" class="mono"><tspan fill="#a6e3a1" font-weight="600">artem@dikmarov ~ % </tspan><tspan fill="#cdd6f4">git log --oneline</tspan></text>
 <text x="24" y="58" xml:space="preserve" class="mono"><tspan fill="#fab387" font-weight="600">* </tspan><tspan fill="#cdd6f4">pushed to ADikmarov/ADikmarov                               </tspan><tspan fill="#a6adc8">1 week ago</tspan></text>
-<text x="24" y="80" xml:space="preserve" class="mono"><tspan fill="#fab387" font-weight="600">* </tspan><tspan fill="#cdd6f4">opened PR 0xMH/pyfunda#13                                   </tspan><tspan fill="#a6adc8">1 week ago</tspan></text>
+<text x="24" y="80" xml:space="preserve" class="mono"><tspan fill="#fab387" font-weight="600">* </tspan><tspan fill="#cdd6f4">opened PR 0xMH/pyfunda#13                                   </tspan><tspan fill="#a6adc8">2 weeks ago</tspan></text>
 
 </svg>
